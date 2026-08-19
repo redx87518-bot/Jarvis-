@@ -34,14 +34,14 @@ dependencies {
     api(project(":core"))
     api(project(":data"))
 
-    api(libs.androidx.core.ktx)
-    api(libs.kotlinx.coroutines.android)
-    api(libs.kotlinx.serialization.json)
+    api(libs.androidxCoreKtx)
+    api(libs.kotlinxCoroutinesAndroid)
+    api(libs.kotlinxSerializationJson)
 
     compileOnly("androidx.appcompat:appcompat:1.7.0")
-    compileOnly(libs.androidx.room.runtime)
+    compileOnly(libs.androidxRoomRuntime)
 
-    api(libs.hilt.android)
+    api(libs.hiltAndroid)
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")

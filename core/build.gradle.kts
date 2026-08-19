@@ -32,9 +32,9 @@ android {
 }
 
 dependencies {
-    api(libs.kotlinx.serialization.json)
-    api(libs.kotlinx.coroutines.core)
-    api(libs.kotlinx.coroutines.android)
+    api(libs.kotlinxSerializationJson)
+    api(libs.kotlinxCoroutinesCore)
+    api(libs.kotlinxCoroutinesAndroid)
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")

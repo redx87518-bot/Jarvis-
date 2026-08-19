@@ -34,17 +34,17 @@ android {
 dependencies {
     api(project(":core"))
 
-    api(libs.androidx.room.runtime)
-    api(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
+    api(libs.androidxRoomRuntime)
+    api(libs.androidxRoomKtx)
+    ksp(libs.androidxRoomCompiler)
 
-    api(libs.kotlinx.serialization.json)
-    api(libs.kotlinx.coroutines.android)
+    api(libs.kotlinxSerializationJson)
+    api(libs.kotlinxCoroutinesAndroid)
 
     api("androidx.datastore:datastore-preferences:1.1.0")
     api("androidx.datastore:datastore:1.0.0")
 
-    api(libs.hilt.android)
+    api(libs.hiltAndroid)
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
