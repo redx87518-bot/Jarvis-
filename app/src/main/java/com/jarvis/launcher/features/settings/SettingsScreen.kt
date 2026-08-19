@@ -389,15 +389,9 @@ fun ThemeToggleSetting(
         onDismissRequest = { expanded = false },
         containerColor = colors.surface,
     ) {
-        DropdownMenuItem(onClick = { onThemeChange(JarvisThemeMode.System); expanded = false }) {
-            Text(text = "System", color = colors.textPrimary)
-        }
-        DropdownMenuItem(onClick = { onThemeChange(JarvisThemeMode.Light); expanded = false }) {
-            Text(text = "Light", color = colors.textPrimary)
-        }
-        DropdownMenuItem(onClick = { onThemeChange(JarvisThemeMode.Dark); expanded = false }) {
-            Text(text = "Dark", color = colors.textPrimary)
-        }
+        DropdownMenuItem(onClick = { onThemeChange(JarvisThemeMode.System); expanded = false }, text = { Text(text = "System", color = colors.textPrimary) })
+        DropdownMenuItem(onClick = { onThemeChange(JarvisThemeMode.Light); expanded = false }, text = { Text(text = "Light", color = colors.textPrimary) })
+        DropdownMenuItem(onClick = { onThemeChange(JarvisThemeMode.Dark); expanded = false }, text = { Text(text = "Dark", color = colors.textPrimary) })
     }
 }
 
@@ -437,9 +431,7 @@ fun ModelProviderSetting(
         containerColor = colors.surface,
     ) {
         options.forEach { option ->
-            DropdownMenuItem(onClick = { onProviderChange(option.first); expanded = false }) {
-                Text(text = option.second, color = colors.textPrimary)
-            }
+            DropdownMenuItem(onClick = { onProviderChange(option.first); expanded = false }, text = { Text(text = option.second, color = colors.textPrimary) })
         }
     }
 }
