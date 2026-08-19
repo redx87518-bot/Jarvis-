@@ -108,30 +108,27 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.12")
 }
 
-    gradle.projectsEvaluated {
-        val compileJavaTask = tasks.named("compileDebugJavaWithJavac", JavaCompile::class.java)
-        val kotlinTask = tasks.findByName("compileDebugKotlin") as? JavaCompile
-        val hiltOutDir = file("build/generated/hilt/component_sources/debug")
+gradle.projectsEvaluated {
+    val compileJavaTask = tasks.named("compileDebugJavaWithJavac", JavaCompile::class.java)
+    val kotlinTask = tasks.findByName("compileDebugKotlin") as? JavaCompile
+    val hiltClassesDir = layout.buildDirectory.dir("hilt-classes/debug")
 
-        val compileHilt = tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
-            source = fileTree(hiltOutDir)
-            classpath = files(
-                compileJavaTask.map { it.classpath },
-                compileJavaTask.map { it.destinationDirectory },
-                kotlinTask?.destinationDirectory
-            )
-            destinationDirectory.set(layout.buildDirectory.dir("hilt-classes/debug"))
-        }
-
-        tasks.named("hiltJavaCompileDebug").configure {
-            finalizedBy(compileHilt)
-        }
-
-        tasks.matching { it.name.startsWith("mergeProjectDex") || it.name == "transformClassesWithDexBuilder" || it.name.startsWith("dexBuilder") }.configureEach {
-            dependsOn(compileHilt)
-        }
-
-        tasks.matching { it.name.startsWith("processDebugJavaRes") }.configureEach {
-            mustRunAfter(compileHilt)
-        }
+    val compileHilt = tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
+        source = fileTree(file("build/generated/hilt/component_sources/debug"))
+        classpath = files(
+            compileJavaTask.map { it.classpath },
+            compileJavaTask.map { it.destinationDirectory },
+            kotlinTask?.destinationDirectory
+        )
+        destinationDirectory.set(hiltClassesDir)
     }
+
+    tasks.named("hiltJavaCompileDebug").configure {
+        finalizedBy(compileHilt)
+    }
+
+    tasks.matching { it.name == "mergeDebugClasses" || it.name.startsWith("dexBuilder") || (it.name.startsWith("transform") && it.name.contains("Classes")) }.configureEach {
+        dependsOn(compileHilt)
+        inputs.dir(hiltClassesDir)
+    }
+}
