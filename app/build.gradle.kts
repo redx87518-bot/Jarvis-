@@ -74,12 +74,6 @@ android {
     }
 }
 
-afterEvaluate {
-    tasks.matching { it.name.contains("compileDebugJavaWithJavac") }.configureEach {
-        dependsOn(tasks.matching { it.name.contains("hiltJavaCompileDebug") })
-    }
-}
-
 dependencies {
     implementation(project(":core"))
     implementation(project(":data"))
