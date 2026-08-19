@@ -6,7 +6,6 @@ buildscript {
     }
     dependencies {
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.52")
-        classpath("org.jetbrains.kotlin:kotlin-compose-gradle-plugin:2.0.21")
     }
 }
 

@@ -7,8 +7,6 @@ plugins {
     id("kotlin-parcelize")
 }
 
-apply(plugin = "org.jetbrains.kotlin.compose")
-
 android {
     compileSdk = 35
 
@@ -41,6 +39,10 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     packaging {

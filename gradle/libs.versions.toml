@@ -1,24 +1,27 @@
 [versions]
-agp = "8.7.3"
-kotlin = "2.0.21"
-ksp = "2.0.21-1.0.25"
-composeBom = "2024.10.00"
+agp = "8.5.2"
+kotlin = "1.9.25"
+ksp = "1.9.25-1.0.21"
+composeBom = "2024.03.00"
+composeCompiler = "1.5.14"
 room = "2.6.1"
 hilt = "2.52"
 kotlinxCoroutines = "1.8.1"
 kotlinxSerializationJson = "1.7.3"
 androidxCore = "1.13.1"
-androidxActivity = "1.9.2"
+androidxActivity = "1.9.0"
 androidxLifecycle = "2.8.6"
 androidxNavigation = "2.8.0"
 
 [libraries]
+# AndroidX Core & Foundation
 androidxCoreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
 androidxActivityCompose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidxLifecycleRuntimeKtx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
 androidxLifecycleViewmodelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidxLifecycleViewmodelKtx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
 
+# Compose
 androidxComposeBom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidxComposeUi = { group = "androidx.compose.ui", name = "ui" }
 androidxComposeUiGraphics = { group = "androidx.compose.ui", name = "ui-graphics" }
@@ -29,18 +32,31 @@ androidxComposeMaterialIconsExtended = { group = "androidx.compose.material", na
 androidxComposeMaterialIconsCore = { group = "androidx.compose.material", name = "material-icons-core" }
 androidxComposeRuntimeLivedata = { group = "androidx.compose.runtime", name = "runtime-livedata" }
 androidxNavigationCompose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
+androidxComposeUiText = { group = "androidx.compose.ui", name = "ui-text" }
+androidxComposeFoundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidxComposeFoundationLayout = { group = "androidx.compose.foundation", name = "foundation-layout" }
+androidxComposeMaterial3WindowSize = { group = "androidx.compose.material3", name = "material3-window-size-class" }
 
+# KotlinX
 kotlinxCoroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinxCoroutinesAndroid = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 kotlinxSerializationJson = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
+# Room
 androidxRoomRuntime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidxRoomKtx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidxRoomCompiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
+# Hilt
 hiltAndroid = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hiltCompiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 hiltNavigationCompose = { group = "androidx.hilt", name = "hilt-navigation-compose", version = "1.2.0" }
+
+# Testing
+turbine = { group = "app.cash", name = "turbine", version = "1.1.0" }
+truth = { group = "com.google.truth", name = "truth", version = "1.4.2" }
+mockk = { group = "io.mockk", name = "mockk", version = "1.13.12" }
+kotlinCoroutinesTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
