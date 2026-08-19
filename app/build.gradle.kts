@@ -76,7 +76,6 @@ afterEvaluate {
         source = if (hiltCompSrc.exists()) fileTree(hiltCompSrc) else fileTree(mapOf("dir" to "src/main/java", "includes" to emptyList<String>()))
         classpath = if (rcp != null) files(rcp.files + classOut.get().asFile) else files(classOut.get().asFile)
         destinationDirectory.set(classOut)
-        isDebuggable = true
     }
 
     tasks.matching { it.name.startsWith("hilt") }.configureEach {
