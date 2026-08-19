@@ -6,9 +6,9 @@
         <item name="colorOnSecondary">@color/jarvis_on_secondary</item>
         <item name="colorSurface">@color/jarvis_surface</item>
         <item name="colorOnSurface">@color/jarvis_on_surface</item>
-        <item name="colorBackground">@color/jarvis_background</item>
-        <item name="colorOnBackground">@color/jarvis_on_background</item>
-        <item name="windowLightStatusBar">false</item>
+        <item name="android:colorBackground">@color/jarvis_background</item>
+        <item name="android:colorOnBackground">@color/jarvis_on_background</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="Theme.JARVIS.NoActionBar" parent="Theme.JARVIS">
@@ -19,7 +19,7 @@
     <style name="Theme.JARVIS.FullScreen" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/jarvis_black</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullScreen">true</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">false</item>
     </style>
 </resources>

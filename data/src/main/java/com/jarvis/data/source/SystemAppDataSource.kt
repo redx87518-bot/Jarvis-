@@ -113,7 +113,7 @@ class SystemAppDataSource @Inject constructor(
                 @Suppress("DEPRECATION")
                 packageManager.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS)
             }
-            val perms = pkgInfo.requestedPermissions ?: emptyList()
+            val perms: Array<String> = pkgInfo.requestedPermissions ?: emptyArray()
             perms.any { it == android.Manifest.permission.INTERNET }
         } catch (e: Exception) {
             false

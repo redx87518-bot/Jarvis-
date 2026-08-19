@@ -19,7 +19,7 @@ class TaskRepository @Inject constructor(
         val statuses = when (filter) {
             TaskFilter.ALL -> emptyList()
             TaskFilter.ACTIVE -> listOf(
-                TaskStatus.RUNNING, TaskStatus.PLANNING, TaskStatus.EXECUTING,
+                TaskStatus.RUNNING, TaskStatus.PLANNING,
                 TaskStatus.VERIFYING, TaskStatus.RECOVERING, TaskStatus.CREATED,
             )
             TaskFilter.COMPLETED -> listOf(TaskStatus.COMPLETED)
