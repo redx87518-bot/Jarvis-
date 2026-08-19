@@ -2,6 +2,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
         classpath("com.google.dagger:hilt-gradle-plugin:2.52")
