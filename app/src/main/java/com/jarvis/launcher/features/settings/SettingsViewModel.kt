@@ -3,7 +3,7 @@ package com.jarvis.launcher.features.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jarvis.data.settings.SettingsManager
-import com.jarvis.launcher.ui.theme.JarvisThemeMode
+import com.jarvis.core.JarvisThemeMode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
