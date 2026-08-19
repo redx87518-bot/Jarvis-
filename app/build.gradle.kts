@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.kotlinCompose)
     alias(libs.plugins.hilt)
     id("kotlin-parcelize")
-    id("kotlin-kapt")
 }
 
 android {
@@ -98,7 +97,7 @@ dependencies {
     implementation(libs.androidxRoomKtx)
 
     implementation(libs.hiltAndroid)
-    kapt(libs.hiltCompiler)
+    ksp(libs.hiltCompiler)
 
     debugImplementation(libs.androidxComposeUiTooling)
 
