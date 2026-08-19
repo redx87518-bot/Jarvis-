@@ -2,9 +2,11 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.52")
+        classpath("org.jetbrains.kotlin:kotlin-compose-gradle-plugin:2.0.21")
     }
 }
 
@@ -13,7 +15,6 @@ plugins {
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.kotlinSerialization) apply false
-    alias(libs.plugins.kotlinCompose) apply false
     alias(libs.plugins.ksp) apply false
 }
 
