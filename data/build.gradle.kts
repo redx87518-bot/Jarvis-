@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
     id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
@@ -45,7 +46,7 @@ dependencies {
     api("androidx.datastore:datastore:1.0.0")
 
     api(libs.hiltAndroid)
-    ksp(libs.hiltCompiler)
+    kapt(libs.hiltCompiler)
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
