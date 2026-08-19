@@ -1,0 +1,7 @@
+<resources>
+    <style name="Widget.JARVIS.BottomNavigation" parent="Widget.Material3.NavigationBar">
+        <item name="itemIconSize">24dp</item>
+        <item name="itemActiveIndicatorColor">@color/md_theme_secondary</item>
+        <item name="itemActiveIndicatorHeight">4dp</item>
+    </style>
+</resources>

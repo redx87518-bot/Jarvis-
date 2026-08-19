@@ -1,0 +1,19 @@
+<resources>
+    <dimen name="home_padding">16dp</dimen>
+    <dimen name="app_card_size">72dp</dimen>
+    <dimen name="app_card_small">48dp</dimen>
+    <dimen name="orb_size_small">40dp</dimen>
+    <dimen name="orb_size_medium">56dp</dimen>
+    <dimen name="orb_size_large">80dp</dimen>
+    <dimen name="orb_ring_width">3dp</dimen>
+    <dimen name="search_bar_height">48dp</dimen>
+    <dimen name="bottom_nav_height">56dp</dimen>
+    <dimen name="favorite_grid_spacing">12dp</dimen>
+    <dimen name="ai_briefing_card_padding">16dp</dimen>
+    <dimen name="task_card_padding">12dp</dimen>
+    <dimen name="confirmation_dialog_corner">24dp</dimen>
+    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="body_text_size">14sp</dimen>
+    <dimen name="title_text_size">20sp</dimen>
+    <dimen name="greeting_text_size">24sp</dimen>
+</resources>
