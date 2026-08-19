@@ -115,7 +115,7 @@ dependencies {
                 val classOutDir = file("build/intermediates/javac/debug/classes")
                 if (genDir.exists()) {
                     val compileJava = tasks.findByName("compileDebugJavaWithJavac") as? JavaCompile
-                    val cp = (compileJava?.classpath?.files ?: emptySet() + classOutDir).joinToString(File.pathSeparator) { it.absolutePath }
+                    val cp = ((compileJava?.classpath?.files ?: emptySet()) + classOutDir).joinToString(File.pathSeparator) { it.absolutePath }
                     val javaFiles = genDir.walkTopDown().filter { it.extension == "java" }.toList()
                     if (javaFiles.isNotEmpty()) {
                         exec {
