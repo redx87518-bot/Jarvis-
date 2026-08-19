@@ -68,23 +68,19 @@ android {
 }
 
 afterEvaluate {
-    tasks.matching { it.name == "hiltJavaCompileDebug" }.configureEach {
-        doLast {
-            val generatedDir = file("build/generated/hilt/component_sources/debug")
-            val classOutput = file("build/intermediates/javac/debug/classes")
-            val runtimeClasspath = configurations.findByName("debugRuntimeClasspath")
-            if (generatedDir.exists() && runtimeClasspath != null) {
-                val javaFiles = generatedDir.walkTopDown().filter { it.extension == "java" }.toList()
-                if (javaFiles.isNotEmpty()) {
-                    val cp = (runtimeClasspath.files + classOutput).joinToString(File.pathSeparator) { it.absolutePath }
-                    exec {
-                        commandLine = listOf("javac", "-d", classOutput.absolutePath, "-classpath", cp) +
-                            javaFiles.map { it.absolutePath }
-                        isIgnoreExitValue = true
-                    }
-                }
-            }
-        }
+    val hiltCompSrc = file("build/generated/hilt/component_sources/debug")
+    val classOut = layout.buildDirectory.dir("intermediates/javac/debug/classes")
+    val rcp = configurations.findByName("debugRuntimeClasspath")
+
+    tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
+        source = if (hiltCompSrc.exists()) fileTree(hiltCompSrc) else fileTree(mapOf("dir" to "src/main/java", "includes" to emptyList<String>()))
+        classpath = if (rcp != null) files(rcp.files + classOut.get().asFile) else files(classOut.get().asFile)
+        destinationDirectory.set(classOut)
+        isDebuggable = true
+    }
+
+    tasks.matching { it.name.startsWith("hilt") }.configureEach {
+        finalizedBy("compileHiltComponentSourcesDebug")
     }
 }
 
