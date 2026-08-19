@@ -4,7 +4,7 @@ import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.rememberUpdatedState
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -48,9 +48,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.card.Card
-import androidx.compose.material3.card.CardColors
-import androidx.compose.material3.card.CardDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -96,11 +96,11 @@ fun AiChatScreen(
         AgentUiState.Listening -> OrbState.LISTENING
         AgentUiState.Processing -> OrbState.PROCESSING
         AgentUiState.Thinking -> OrbState.THINKING
-        AgentUiState.Executing -> OrbState.EXECUTING
+        AgentUiState.Executing -> OrbState.PROCESSING
         AgentUiState.WaitingForConfirmation -> OrbState.WAITING_FOR_CONFIRMATION
         AgentUiState.Speaking -> OrbState.SPEAKING
-        AgentUiState.Error -> OrbState.ERROR
-        AgentUiState.Success -> OrbState.SUCCESS
+        is AgentUiState.Error -> OrbState.ERROR
+        is AgentUiState.Success -> OrbState.SUCCESS
     }
 
     LaunchedEffect(uiState.messages.size) {
@@ -209,15 +209,15 @@ fun EmptyState(modifier: Modifier = Modifier) {
 @Composable
 fun ChatMessageBubble(message: ChatMessageUi) {
     val colors = jarvisColors()
-    val alignment = if (message.isUser) Alignment.TopEnd else Alignment.TopStart
-    val bubbleColor = if (message.isUser) colors.primary else colors.surface
-    val textColor = if (message.isUser) colors.textPrimary else colors.textPrimary
+    val alignment = if (message.role == ChatMessageUi.Role.USER) Alignment.TopEnd else Alignment.TopStart
+    val bubbleColor = if (message.role == ChatMessageUi.Role.USER) colors.primary else colors.surface
+    val textColor = if (message.role == ChatMessageUi.Role.USER) colors.textPrimary else colors.textPrimary
 
     Row(
-        horizontalArrangement = if (message.isUser) Arrangement.End else Arrangement.Start,
+        horizontalArrangement = if (message.role == ChatMessageUi.Role.USER) Arrangement.End else Arrangement.Start,
         modifier = Modifier.fillMaxWidth(),
     ) {
-        if (!message.isUser) {
+        if (message.role != ChatMessageUi.Role.USER) {
             Icon(
                 imageVector = Icons.Default.AccountCircle,
                 contentDescription = "JARVIS",
@@ -228,7 +228,7 @@ fun ChatMessageBubble(message: ChatMessageUi) {
         }
         Card(
             modifier = Modifier
-                .clip(RoundedCornerShape(if (message.isUser) 18.dp else 20.dp))
+                .clip(RoundedCornerShape(if (message.role == ChatMessageUi.Role.USER) 18.dp else 20.dp))
                 .widthIn(max = 280.dp),
             colors = CardColors(
                 containerColor = bubbleColor,
@@ -236,7 +236,7 @@ fun ChatMessageBubble(message: ChatMessageUi) {
                 disabledContainerColor = bubbleColor,
                 disabledContentColor = textColor,
             ),
-            shape = RoundedCornerShape(if (message.isUser) 18.dp else 20.dp),
+            shape = RoundedCornerShape(if (message.role == ChatMessageUi.Role.USER) 18.dp else 20.dp),
         ) {
             Text(
                 text = message.content,
@@ -245,7 +245,7 @@ fun ChatMessageBubble(message: ChatMessageUi) {
                 modifier = Modifier.padding(12.dp),
             )
         }
-        if (message.isUser) {
+        if (message.role == ChatMessageUi.Role.USER) {
             Spacer(modifier = Modifier.width(8.dp))
             Icon(
                 imageVector = Icons.Default.AccountCircle,

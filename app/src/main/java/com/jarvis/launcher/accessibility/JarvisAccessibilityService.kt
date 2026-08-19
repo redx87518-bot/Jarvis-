@@ -158,13 +158,8 @@ class JarvisAccessibilityService : AccessibilityService() {
 
     fun clickNode(node: AccessibilityNodeInfo) {
         val action = AccessibilityNodeInfo.ACTION_CLICK
-        if (node.addAction(action) || node.performAction(action)) {
-            Logger.info("Clicked node via accessibility action")
-        } else {
-            val rect = Rect()
-            node.getBoundsInScreen(rect)
-            clickAt(rect.centerX().toFloat(), rect.centerY().toFloat())
-        }
+        node.performAction(action)
+        Logger.info("Clicked node via accessibility action")
     }
 
     fun swipe(startX: Float, startY: Float, endX: Float, endY: Float) {
