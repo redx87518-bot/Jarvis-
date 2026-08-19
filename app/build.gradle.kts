@@ -67,22 +67,6 @@ android {
     }
 }
 
-afterEvaluate {
-    val hiltCompSrc = file("build/generated/hilt/component_sources/debug")
-    val classOut = layout.buildDirectory.dir("intermediates/javac/debug/classes")
-    val rcp = configurations.findByName("debugRuntimeClasspath")
-
-    tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
-        source = if (hiltCompSrc.exists()) fileTree(hiltCompSrc) else fileTree(mapOf("dir" to "src/main/java", "includes" to emptyList<String>()))
-        classpath = if (rcp != null) files(rcp.files + classOut.get().asFile) else files(classOut.get().asFile)
-        destinationDirectory.set(classOut)
-    }
-
-    tasks.matching { it.name.startsWith("hilt") }.configureEach {
-        finalizedBy("compileHiltComponentSourcesDebug")
-    }
-}
-
 dependencies {
     implementation(project(":core"))
     implementation(project(":data"))
@@ -122,4 +106,18 @@ dependencies {
     testImplementation("app.cash.turbine:turbine:1.1.0")
     testImplementation("com.google.truth:truth:1.4.2")
     testImplementation("io.mockk:mockk:1.13.12")
+}
+
+gradle.projectsEvaluated {
+    val hiltCompDir = file("build/generated/hilt/component_sources/debug")
+    val classOutDir = file("build/intermediates/javac/debug/classes")
+    val rcp = configurations.findByName("debugRuntimeClasspath")
+    val compileHilt = tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
+        source = if (hiltCompDir.exists()) fileTree(hiltCompDir) else fileTree("src/main/java")
+        classpath = if (rcp != null) files(rcp.files + classOutDir) else files(classOutDir)
+        destinationDirectory.set(classOutDir)
+    }
+    tasks.named("hiltJavaCompileDebug").configure {
+        finalizedBy(compileHilt)
+    }
 }
