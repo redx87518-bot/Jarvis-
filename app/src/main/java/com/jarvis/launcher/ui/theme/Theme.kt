@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import com.jarvis.core.JarvisThemeMode
 
 typealias JarvisThemeMode = com.jarvis.core.JarvisThemeMode
@@ -143,8 +144,8 @@ fun JARVISTheme(
     }
 
     val colorScheme = when {
-        dynamicColor && isDark -> dynamicDarkColorScheme()
-        dynamicColor && !isDark -> dynamicLightColorScheme()
+        dynamicColor && isDark -> dynamicDarkColorScheme(LocalContext.current)
+        dynamicColor && !isDark -> dynamicLightColorScheme(LocalContext.current)
         isDark -> DarkColors
         else -> LightColors
     }
