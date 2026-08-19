@@ -1,14 +1,3 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.52")
-    }
-}
-
 plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.androidLibrary) apply false
@@ -16,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization) apply false
     alias(libs.plugins.kotlinCompose) apply false
     alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.hilt) apply false
 }
 
 task("clean") {
