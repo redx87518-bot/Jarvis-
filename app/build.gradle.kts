@@ -111,14 +111,17 @@ dependencies {
 gradle.projectsEvaluated {
     val hiltCompDir = file("build/generated/hilt/component_sources/debug")
     val classOutDir = file("build/intermediates/javac/debug/classes")
+    val compileJavaTask = tasks.named("compileDebugJavaWithJavac")
+
     val compileHilt = tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
         source = fileTree(hiltCompDir)
         classpath = files(
-            configurations.get("debugRuntimeClasspath"),
-            classOutDir
+            sourceSets.main.get().compileClasspath,
+            compileJavaTask.map { it.destinationDirectory }
         )
         destinationDirectory.set(classOutDir)
     }
+
     tasks.named("hiltJavaCompileDebug").configure {
         finalizedBy(compileHilt)
     }
