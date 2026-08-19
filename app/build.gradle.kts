@@ -109,21 +109,32 @@ dependencies {
 }
 
     gradle.projectsEvaluated {
-        tasks.matching { it.name == "hiltJavaCompileDebug" }.configureEach {
-            doLast {
-                val genDir = file("build/generated/hilt/component_sources/debug")
-                if (genDir.exists()) {
-                    val compileJava = tasks.named("compileDebugJavaWithJavac", JavaCompile::class.java)
-                    val outDir = compileJava.get().destinationDirectory.get().asFile
-                    val cp = (compileJava.get().classpath.files + outDir).joinToString(File.pathSeparator) { it.absolutePath }
-                    val javaFiles = genDir.walkTopDown().filter { it.extension == "java" }.toList()
-                    if (javaFiles.isNotEmpty()) {
-                        exec {
-                            commandLine = listOf("javac", "-d", outDir.absolutePath, "-classpath", cp) + javaFiles.map { it.absolutePath }
-                            isIgnoreExitValue = true
-                        }
-                    }
-                }
-            }
+        val compileJavaTask = tasks.named("compileDebugJavaWithJavac", JavaCompile::class.java)
+        val kotlinTask = tasks.findByName("compileDebugKotlin") as? JavaCompile
+        val hiltCompDir = file("build/generated/hilt/component_sources/debug")
+
+        val compileHilt = tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
+            source = fileTree(hiltCompDir)
+            classpath = files(
+                compileJavaTask.map { it.classpath },
+                compileJavaTask.map { it.destinationDirectory },
+                kotlinTask?.destinationDirectory
+            )
+            destinationDirectory.set(layout.buildDirectory.dir("hilt-classes/debug"))
+        }
+
+        tasks.named("hiltJavaCompileDebug").configure {
+            finalizedBy(compileHilt)
+        }
+
+        val hiltClassesDir = layout.buildDirectory.dir("hilt-classes/debug")
+        tasks.matching {
+            it.name in listOf("mergeDebugClasses", "transformDebugClassesWithAsm", "transformDebugClassesWithInlineClasses", "dexBuilderDebug", "processDebugJavaRes", "processDebugResources") ||
+            it.name.startsWith("mergeProjectDex") ||
+            it.name.startsWith("transformClassesWith") ||
+            it.name.startsWith("dexBuilder")
+        }.configureEach {
+            dependsOn(compileHilt)
+            inputs.files(compileHilt.map { it.destinationDirectory })
         }
     }
