@@ -109,22 +109,24 @@ dependencies {
 }
 
     gradle.projectsEvaluated {
-        val compileJavaTask = tasks.named("compileDebugJavaWithJavac", JavaCompile::class.java)
-
-        val compileHilt = tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
-            source = fileTree(file("build/generated/hilt/component_sources/debug"))
-            classpath = files(
-                compileJavaTask.map { it.classpath },
-                compileJavaTask.map { it.destinationDirectory }
-            )
-            destinationDirectory.set(compileJavaTask.map { it.destinationDirectory.get() })
+        tasks.matching { it.name == "hiltJavaCompileDebug" }.configureEach {
+            doLast {
+                val genDir = file("build/generated/hilt/component_sources/debug")
+                val classOutDir = file("build/intermediates/javac/debug/classes")
+                if (genDir.exists()) {
+                    val compileJava = tasks.findByName("compileDebugJavaWithJavac") as? JavaCompile
+                    val cp = (compileJava?.classpath?.files ?: emptySet() + classOutDir).joinToString(File.pathSeparator) { it.absolutePath }
+                    val javaFiles = genDir.walkTopDown().filter { it.extension == "java" }.toList()
+                    if (javaFiles.isNotEmpty()) {
+                        exec {
+                            commandLine = listOf("javac", "-d", classOutDir.absolutePath, "-classpath", cp) + javaFiles.map { it.absolutePath }
+                            isIgnoreExitValue = true
+                        }
+                    }
+                }
+            }
         }
-
-        tasks.named("hiltJavaCompileDebug").configure {
-            finalizedBy(compileHilt)
-        }
-
-        tasks.matching { it.name == "transformDebugClassesWithAsm" || it.name == "transformClassesWithAsm" }.configureEach {
-            dependsOn(compileHilt)
+        tasks.matching { it.name.startsWith("processDebug") || it.name.startsWith("transformDebug") || it.name.startsWith("mergeDebug") || it.name.startsWith("dexBuilderDebug") }.configureEach {
+            dependsOn("hiltJavaCompileDebug")
         }
     }
