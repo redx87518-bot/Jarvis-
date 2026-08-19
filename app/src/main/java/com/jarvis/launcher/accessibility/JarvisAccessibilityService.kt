@@ -2,7 +2,6 @@ package com.jarvis.launcher.accessibility
 
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.GestureDescription
-import android.accessibilityservice.GestureResultCallback
 import android.content.Context
 import android.content.Intent
 import android.graphics.Path
@@ -170,12 +169,7 @@ class JarvisAccessibilityService : AccessibilityService() {
         val gesture = GestureDescription.Builder()
             .addStroke(stroke)
             .build()
-        dispatchGesture(gesture, object : GestureResultCallback() {
-            override fun onCompleted(gestureDescription: GestureDescription) {
-                super.onCompleted(gestureDescription)
-                Logger.debug("Swipe gesture completed")
-            }
-        }, null)
+         dispatchGesture(gesture, null, null)
     }
 
     fun typeText(text: String) {

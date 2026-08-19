@@ -1,6 +1,9 @@
 package com.jarvis.launcher.features.apps
 
+import android.graphics.Bitmap
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,11 +21,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.OpenInApp
 import androidx.compose.material.icons.filled.QuestionMark
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -208,7 +209,7 @@ fun AppIntelligenceHeader(uiState: AppIntelligenceUiState) {
     ) {
         val iconBitmap = uiState.iconBitmap
         if (iconBitmap != null) {
-            androidx.compose.ui.graphics.Image(
+            Image(
                 bitmap = iconBitmap.asImageBitmap(),
                 contentDescription = uiState.appName,
                 modifier = Modifier

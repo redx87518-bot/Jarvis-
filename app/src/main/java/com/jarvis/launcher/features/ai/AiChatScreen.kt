@@ -5,6 +5,7 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -22,6 +23,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -262,7 +264,7 @@ fun TypingIndicator(modifier: Modifier = Modifier) {
     val colors = jarvisColors()
     val dots = listOf("•", "•", "•")
     val transition = androidx.compose.animation.core.rememberInfiniteTransition(label = "typing")
-    val offsets = List(3) { index ->
+    val offsets: List<androidx.compose.runtime.State<Float>> = List(3) { index ->
         transition.animateFloat(
             initialValue = 0f,
             targetValue = 1f,
