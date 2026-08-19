@@ -7,7 +7,6 @@ plugins {
     id("kotlin-parcelize")
     id("kotlin-kapt")
 }
-}
 
 android {
     compileSdk = 35
