@@ -108,27 +108,22 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.12")
 }
 
-gradle.projectsEvaluated {
-    val compileJavaTask = tasks.named("compileDebugJavaWithJavac", JavaCompile::class.java)
-    val kotlinTask = tasks.findByName("compileDebugKotlin") as? JavaCompile
-    val hiltClassesDir = layout.buildDirectory.dir("hilt-classes/debug")
-
-    val compileHilt = tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
-        source = fileTree(file("build/generated/hilt/component_sources/debug"))
-        classpath = files(
-            compileJavaTask.map { it.classpath },
-            compileJavaTask.map { it.destinationDirectory },
-            kotlinTask?.destinationDirectory
-        )
-        destinationDirectory.set(hiltClassesDir)
+    gradle.projectsEvaluated {
+        tasks.matching { it.name == "hiltJavaCompileDebug" }.configureEach {
+            doLast {
+                val genDir = file("build/generated/hilt/component_sources/debug")
+                if (genDir.exists()) {
+                    val compileJava = tasks.named("compileDebugJavaWithJavac", JavaCompile::class.java)
+                    val outDir = compileJava.get().destinationDirectory.get().asFile
+                    val cp = (compileJava.get().classpath.files + outDir).joinToString(File.pathSeparator) { it.absolutePath }
+                    val javaFiles = genDir.walkTopDown().filter { it.extension == "java" }.toList()
+                    if (javaFiles.isNotEmpty()) {
+                        exec {
+                            commandLine = listOf("javac", "-d", outDir.absolutePath, "-classpath", cp) + javaFiles.map { it.absolutePath }
+                            isIgnoreExitValue = true
+                        }
+                    }
+                }
+            }
+        }
     }
-
-    tasks.named("hiltJavaCompileDebug").configure {
-        finalizedBy(compileHilt)
-    }
-
-    tasks.matching { it.name == "mergeDebugClasses" || it.name.startsWith("dexBuilder") || (it.name.startsWith("transform") && it.name.contains("Classes")) }.configureEach {
-        dependsOn(compileHilt)
-        inputs.dir(hiltClassesDir)
-    }
-}
