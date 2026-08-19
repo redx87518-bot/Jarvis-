@@ -16,7 +16,7 @@
         android:theme="@style/Theme.JARVIS">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".features.home.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/Theme.JARVIS.NoActionBar">
