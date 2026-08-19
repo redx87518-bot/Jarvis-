@@ -6,9 +6,8 @@
         <item name="colorOnSecondary">@color/jarvis_on_secondary</item>
         <item name="colorSurface">@color/jarvis_surface</item>
         <item name="colorOnSurface">@color/jarvis_on_surface</item>
-        <item name="android:colorBackground">@color/jarvis_background</item>
-        <item name="android:colorOnBackground">@color/jarvis_on_background</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="colorBackground">@color/jarvis_background</item>
+        <item name="colorOnBackground">@color/jarvis_on_background</item>
     </style>
 
     <style name="Theme.JARVIS.NoActionBar" parent="Theme.JARVIS">

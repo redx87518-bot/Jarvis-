@@ -2,8 +2,8 @@ package com.jarvis.data.settings
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.hilt.android.qualifiers.ApplicationContext
 import com.jarvis.core.JarvisThemeMode
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
