@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -56,7 +57,7 @@ fun VoiceVisualizer(
                 color = if (animate) colors.primary.copy(alpha = 0.5f + 0.5f * height) else colors.primary,
                 topLeft = Offset(x, size.height - barHeight),
                 size = Size(barWidth * 0.7f, barHeight),
-                cornerRadius = 4f,
+                cornerRadius = CornerRadius(4f),
             )
         }
     }

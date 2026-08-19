@@ -16,6 +16,34 @@ import com.jarvis.core.JarvisThemeMode
 
 typealias JarvisThemeMode = com.jarvis.core.JarvisThemeMode
 
+private val DarkPrimary = Color(0xFF4A90D9)
+private val DarkOnPrimary = Color(0xFFFFFFFF)
+private val DarkPrimaryContainer = Color(0xFF1E3A6B)
+private val DarkSecondary = Color(0xFF8E7CFA)
+private val DarkOnSecondary = Color(0xFF000000)
+private val DarkTertiary = Color(0xFF63D3D6)
+private val DarkBackground = Color(0xFF0A0A0E)
+private val DarkSurface = Color(0xFF1A1A22)
+private val DarkOnSurface = Color(0xFFE5E5E5)
+private val DarkOnSurfaceVariant = Color(0xFFA0A0AC)
+private val DarkOutline = Color(0xFF404049)
+private val DarkError = Color(0xFFFF5252)
+private val DarkOnError = Color(0xFFFFFFFF)
+
+private val LightPrimary = Color(0xFF2962CC)
+private val LightOnPrimary = Color(0xFFFFFFFF)
+private val LightPrimaryContainer = Color(0xFFD6E4FF)
+private val LightSecondary = Color(0xFF654B9E)
+private val LightOnSecondary = Color(0xFFFFFFFF)
+private val LightTertiary = Color(0xFF00828C)
+private val LightBackground = Color(0xFFF8F8FC)
+private val LightSurface = Color(0xFFFFFFFF)
+private val LightOnSurface = Color(0xFF1A1A1A)
+private val LightOnSurfaceVariant = Color(0xFF605A69)
+private val LightOutline = Color(0xFFCBC9D2)
+private val LightError = Color(0xFFFF5252)
+private val LightOnError = Color(0xFFFFFFFF)
+
 private val DarkColors = darkColorScheme(
     primary = DarkPrimary,
     onPrimary = DarkOnPrimary,
@@ -47,34 +75,6 @@ private val LightColors = lightColorScheme(
     error = LightError,
     onError = LightOnError,
 )
-
-private val DarkPrimary = Color(0xFF4A90D9)
-private val DarkOnPrimary = Color(0xFFFFFFFF)
-private val DarkPrimaryContainer = Color(0xFF1E3A6B)
-private val DarkSecondary = Color(0xFF8E7CFA)
-private val DarkOnSecondary = Color(0xFF000000)
-private val DarkTertiary = Color(0xFF63D3D6)
-private val DarkBackground = Color(0xFF0A0A0E)
-private val DarkSurface = Color(0xFF1A1A22)
-private val DarkOnSurface = Color(0xFFE5E5E5)
-private val DarkOnSurfaceVariant = Color(0xFFA0A0AC)
-private val DarkOutline = Color(0xFF404049)
-private val DarkError = Color(0xFFFF5252)
-private val DarkOnError = Color(0xFFFFFFFF)
-
-private val LightPrimary = Color(0xFF2962CC)
-private val LightOnPrimary = Color(0xFFFFFFFF)
-private val LightPrimaryContainer = Color(0xFFD6E4FF)
-private val LightSecondary = Color(0xFF654B9E)
-private val LightOnSecondary = Color(0xFFFFFFFF)
-private val LightTertiary = Color(0xFF00828C)
-private val LightBackground = Color(0xFFF8F8FC)
-private val LightSurface = Color(0xFFFFFFFF)
-private val LightOnSurface = Color(0xFF1A1A1A)
-private val LightOnSurfaceVariant = Color(0xFF605A69)
-private val LightOutline = Color(0xFFCBC9D2)
-private val LightError = Color(0xFFFF5252)
-private val LightOnError = Color(0xFFFFFFFF)
 
 data class JarvisColors(
     val background: Color = DarkBackground,
