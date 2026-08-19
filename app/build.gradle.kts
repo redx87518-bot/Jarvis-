@@ -123,4 +123,8 @@ dependencies {
         tasks.named("hiltJavaCompileDebug").configure {
             finalizedBy(compileHilt)
         }
+
+        tasks.matching { it.name == "transformDebugClassesWithAsm" || it.name == "transformClassesWithAsm" }.configureEach {
+            dependsOn(compileHilt)
+        }
     }
