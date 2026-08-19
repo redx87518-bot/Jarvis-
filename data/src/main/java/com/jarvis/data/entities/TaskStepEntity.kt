@@ -1,6 +1,7 @@
 package com.jarvis.data.entities
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.jarvis.core.tasks.TaskStatus
 

@@ -12,6 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
+import com.jarvis.core.JarvisThemeMode
+
+typealias JarvisThemeMode = com.jarvis.core.JarvisThemeMode
 
 private val DarkColors = darkColorScheme(
     primary = DarkPrimary,
@@ -72,12 +75,6 @@ private val LightOnSurfaceVariant = Color(0xFF605A69)
 private val LightOutline = Color(0xFFCBC9D2)
 private val LightError = Color(0xFFFF5252)
 private val LightOnError = Color(0xFFFFFFFF)
-
-sealed class JarvisThemeMode {
-    object System : JarvisThemeMode()
-    object Light : JarvisThemeMode()
-    object Dark : JarvisThemeMode()
-}
 
 data class JarvisColors(
     val background: Color = DarkBackground,

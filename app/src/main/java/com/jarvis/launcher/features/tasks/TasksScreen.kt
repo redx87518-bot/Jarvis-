@@ -307,7 +307,7 @@ fun TaskCard(
 
 private fun statusLabel(status: TaskStatus): String = when (status) {
     TaskStatus.RUNNING -> "Running"
-    TaskStatus.PENDING -> "Pending"
+    TaskStatus.CREATED -> "Pending"
     TaskStatus.PLANNING -> "Planning"
     TaskStatus.EXECUTING -> "Executing"
     TaskStatus.WAITING_FOR_USER -> "Waiting"

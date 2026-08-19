@@ -1,4 +1,3 @@
-import android.graphics.Bitmap
 package com.jarvis.launcher.features.apps
 
 import androidx.compose.foundation.background

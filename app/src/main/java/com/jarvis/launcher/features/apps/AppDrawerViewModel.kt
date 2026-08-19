@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
@@ -41,16 +42,18 @@ class AppDrawerViewModel @Inject constructor(
     private val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
 
-    val uiState = appRepository.getAllEnabled()
-        .map { apps ->
-            val favorites = apps.filter { it.lastUsedTime > System.currentTimeMillis() - 86400000 * 7 }
-            AppDrawerUiState(
-                allApps = apps,
-                filteredApps = if (_searchQuery.value.isBlank()) apps else filterApps(apps, _searchQuery.value),
-                categories = buildCategories(apps),
-                isLoading = false,
-            )
-        }
+    val uiState = combine(
+        appRepository.getAllEnabled(),
+        _searchQuery,
+    ) { apps, query ->
+        AppDrawerUiState(
+            allApps = apps,
+            filteredApps = if (query.isBlank()) apps else filterApps(apps, query),
+            searchQuery = query,
+            categories = buildCategories(apps),
+            isLoading = false,
+        )
+    }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), AppDrawerUiState(isLoading = true))
 
     fun search(query: String): List<AppInfo> {

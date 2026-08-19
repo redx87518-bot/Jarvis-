@@ -2,7 +2,7 @@ package com.jarvis.data.settings
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.jarvis.launcher.ui.theme.JarvisThemeMode
+import com.jarvis.core.JarvisThemeMode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

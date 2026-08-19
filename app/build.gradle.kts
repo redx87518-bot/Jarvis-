@@ -77,7 +77,7 @@ dependencies {
     implementation(libs.androidxLifecycleViewmodelCompose)
     implementation(libs.androidxLifecycleViewmodelKtx)
 
-    implementation(libs.androidxComposeBom)
+    implementation(platform(libs.androidxComposeBom))
     implementation(libs.androidxComposeUi)
     implementation(libs.androidxComposeUiGraphics)
     implementation(libs.androidxComposeUiToolingPreview)
