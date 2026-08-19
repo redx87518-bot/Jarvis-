@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items as lazyItems
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -121,7 +122,7 @@ fun HomeScreen(
             selectedRoute = "home",
             onItemSelected = { route ->
                 navController.navigate(route) {
-                    popUpTo(navController.graph.startDestinationId) { saveableState = true }
+                    popUpTo(navController.graph.startDestinationId) { inclusive = false }
                     launchSingleTop = true
                 }
             },
@@ -258,7 +259,7 @@ fun FavoritesSection(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(horizontal = 0.dp),
         ) {
-            items(favorites, key = { it.packageName }) { app ->
+            lazyItems(favorites, key = { it.packageName }) { app ->
                 AppCard(
                     app = app,
                     size = 64.dp,

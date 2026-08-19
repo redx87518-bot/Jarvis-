@@ -177,7 +177,7 @@ class JarvisAccessibilityService : AccessibilityService() {
         val focused = findFocusedInput(root)
         if (focused != null) {
             val args = Bundle()
-            args.putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHAR_SEQUENCE, text)
+            args.putCharSequence("TEXT", text)
             focused.performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, args)
         }
     }

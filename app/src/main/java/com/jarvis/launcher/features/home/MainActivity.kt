@@ -10,7 +10,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jarvis.launcher.features.settings.SettingsViewModel
 import com.jarvis.launcher.ui.JarvisApp
 import com.jarvis.launcher.ui.theme.JARVISTheme
-import com.jarvis.launcher.ui.theme.JarvisThemeMode
+import com.jarvis.core.JarvisThemeMode
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.hilt.navigation.compose.hiltViewModel
 
@@ -33,10 +33,10 @@ fun MainActivityContent(
     val settings by settingsViewModel.uiState.collectAsStateWithLifecycle()
 
     JARVISTheme(
-        themeMode = when (settings.themeMode) {
-            JarvisThemeMode.Dark -> JarvisThemeMode.Dark
-            JarvisThemeMode.Light -> JarvisThemeMode.Light
-            JarvisThemeMode.System -> JarvisThemeMode.System
+        themeMode = when (val mode = settings.themeMode) {
+            is JarvisThemeMode.Dark -> JarvisThemeMode.Dark
+            is JarvisThemeMode.Light -> JarvisThemeMode.Light
+            is JarvisThemeMode.System -> JarvisThemeMode.System
         },
         dynamicColor = settings.dynamicColor,
     ) {
