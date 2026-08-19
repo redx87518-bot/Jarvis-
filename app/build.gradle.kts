@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.kotlinCompose)
     alias(libs.plugins.ksp)
     id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
@@ -39,10 +40,6 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.7.1"
     }
 
     packaging {
