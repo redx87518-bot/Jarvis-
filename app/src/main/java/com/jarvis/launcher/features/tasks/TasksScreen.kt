@@ -270,7 +270,7 @@ fun TaskCard(
                 Row(
                     horizontalArrangement = Arrangement.End,
                 ) {
-                    TextButton(onClick = { onPause(task.id) }) {
+                    TextButton(onClick = { onPause() }) {
                         Icon(
                             imageVector = Icons.Default.Pause,
                             contentDescription = "Pause",
@@ -280,7 +280,7 @@ fun TaskCard(
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(text = "Pause", color = colors.textSecondary, fontSize = 12.sp)
                     }
-                    TextButton(onClick = { onResume(task.id) }) {
+                    TextButton(onClick = { onResume() }) {
                         Icon(
                             imageVector = Icons.Default.PlayArrow,
                             contentDescription = "Resume",
@@ -290,7 +290,7 @@ fun TaskCard(
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(text = "Resume", color = colors.primary, fontSize = 12.sp)
                     }
-                    TextButton(onClick = { onCancel(task.id) }) {
+                    TextButton(onClick = { onCancel() }) {
                         Icon(
                             imageVector = Icons.Default.Close,
                             contentDescription = "Cancel",

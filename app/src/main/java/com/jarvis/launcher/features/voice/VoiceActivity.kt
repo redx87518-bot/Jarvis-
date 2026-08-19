@@ -42,13 +42,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
+import com.jarvis.core.JarvisThemeMode
 import com.jarvis.launcher.ui.components.JarvisOrb
 import com.jarvis.launcher.ui.components.OrbState
 import com.jarvis.launcher.ui.theme.JARVISTheme
-import com.jarvis.launcher.ui.theme.JarvisThemeMode
 import com.jarvis.launcher.ui.theme.jarvisColors
 import kotlin.math.sin
 
@@ -208,7 +210,7 @@ fun VoiceWaveform(amplitudes: List<Float>) {
                 color = colors.primary,
                 topLeft = androidx.compose.ui.geometry.Offset(x - barWidth * 0.3f, y),
                 size = androidx.compose.ui.geometry.Size(barWidth * 0.6f, barHeight),
-                cornerRadius = 4f,
+                cornerRadius = androidx.compose.ui.geometry.CornerRadius(4f),
             )
         }
     }
