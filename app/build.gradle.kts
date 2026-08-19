@@ -22,6 +22,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        manifestPlaceholders["applicationInfo.packageName"] = "com.jarvis.launcher"
     }
 
     buildTypes {
