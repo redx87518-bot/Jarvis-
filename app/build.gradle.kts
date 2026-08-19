@@ -111,10 +111,12 @@ dependencies {
 gradle.projectsEvaluated {
     val hiltCompDir = file("build/generated/hilt/component_sources/debug")
     val classOutDir = file("build/intermediates/javac/debug/classes")
-    val rcp = configurations.findByName("debugRuntimeClasspath")
     val compileHilt = tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
-        source = if (hiltCompDir.exists()) fileTree(hiltCompDir) else fileTree("src/main/java")
-        classpath = if (rcp != null) files(rcp.files + classOutDir) else files(classOutDir)
+        source = fileTree(hiltCompDir)
+        classpath = files(
+            configurations.get("debugRuntimeClasspath"),
+            classOutDir
+        )
         destinationDirectory.set(classOutDir)
     }
     tasks.named("hiltJavaCompileDebug").configure {
