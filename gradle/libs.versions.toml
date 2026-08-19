@@ -1,7 +1,6 @@
 [versions]
 agp = "8.7.3"
 kotlin = "2.0.21"
-kotlinSerialization = "2.0.21"
 ksp = "2.0.21-1.0.25"
 composeBom = "2024.10.00"
 room = "2.6.1"
@@ -53,6 +52,6 @@ hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-com
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "dagger.hilt.android.plugin", version.ref = "hilt" }
