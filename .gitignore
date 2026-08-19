@@ -1,0 +1,30 @@
+# Gradle
+.gradle/
+build/
+.gradle/
+
+# Local configuration
+local.properties
+gradle.properties
+
+# IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Build output
+/app/build/
+/core/build/
+/data/build/
+/android/build/
+/ai/build/
+/voice/build/
+
+# Generated files
+google-services.json
+/DiffUtil
+
+# OS
+.DS_Store

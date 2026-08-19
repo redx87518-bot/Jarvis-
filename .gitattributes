@@ -1,0 +1,16 @@
+# Auto detect text and perform LF normalization
+* text=auto
+
+# Kotlin
+*.kt text eol=lf
+
+# Gradle
+*.gradle text eol=lf
+*.gradle.kts text eol=lf
+gradlew text eol=lf
+
+# Binary
+*.jar binary
+*.apk binary
+*.aab binary
+*.zip binary

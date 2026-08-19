@@ -2,9 +2,9 @@ package com.jarvis.launcher.features.apps
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jarvis.android.apps.AppManager
 import com.jarvis.core.AppCategory
 import com.jarvis.core.AppInfo
+import com.jarvis.data.repository.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -35,13 +35,13 @@ enum class AppDrawerTab {
 
 @HiltViewModel
 class AppDrawerViewModel @Inject constructor(
-    private val appManager: AppManager,
+    private val appRepository: AppRepository,
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
 
-    val uiState = appManager.observeApps()
+    val uiState = appRepository.getAllEnabled()
         .map { apps ->
             val favorites = apps.filter { it.lastUsedTime > System.currentTimeMillis() - 86400000 * 7 }
             AppDrawerUiState(
@@ -53,11 +53,10 @@ class AppDrawerViewModel @Inject constructor(
         }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), AppDrawerUiState(isLoading = true))
 
-    fun setSearchQuery(query: String) {
+    fun search(query: String): List<AppInfo> {
         _searchQuery.value = query
         val currentApps = uiState.value.allApps
-        val filtered = if (query.isBlank()) currentApps else filterApps(currentApps, query)
-        // Update the state
+        return if (query.isBlank()) currentApps else filterApps(currentApps, query)
     }
 
     private fun filterApps(apps: List<AppInfo>, query: String): List<AppInfo> {
@@ -79,6 +78,11 @@ class AppDrawerViewModel @Inject constructor(
                 it.description?.contains(lower, ignoreCase = true) == true
             }
         }
+    }
+
+    fun naturalLanguageSearch(query: String): List<AppInfo> {
+        val apps = uiState.value.allApps
+        return appRepository.naturalLanguageSearch(query, apps)
     }
 
     private fun buildCategories(apps: List<AppInfo>): List<CategoryCount> {

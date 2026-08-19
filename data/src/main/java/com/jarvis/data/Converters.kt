@@ -9,7 +9,6 @@ import kotlinx.serialization.builtins.toMap
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.String.serializer
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.builtins.MapEntryList
 
 class Converters {
     private val json = Json { ignoreUnknownKeys = true }

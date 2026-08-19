@@ -8,6 +8,8 @@ import com.jarvis.android.apps.AppManager
 import com.jarvis.android.apps.SystemAppManager
 import com.jarvis.core.ai.ModelRouter
 import com.jarvis.core.ai.StubModelRouter
+import com.jarvis.core.agent.AgentOrchestrator
+import com.jarvis.core.agent.JarvisAgentOrchestrator
 import com.jarvis.core.agent.ToolRegistry
 import com.jarvis.core.intent.IntentManager
 import com.jarvis.core.intent.LocalIntentManager
@@ -42,8 +44,7 @@ object AppModule {
             context,
             JarvisDatabase::class.java,
             JarvisDatabase.DB_NAME,
-        ).fallbackToInheritedContext()
-            .fallbackToDestructiveMigrationOnDowngrade()
+        ).fallbackToDestructiveMigration()
             .build()
 
     @Provides
@@ -82,6 +83,18 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideAppRepository(appInfoDao: AppInfoDao): AppRepository = AppRepository(appInfoDao)
+
+    @Provides
+    @Singleton
+    fun provideTaskRepository(taskDao: TaskDao): TaskRepository = TaskRepository(taskDao)
+
+    @Provides
+    @Singleton
+    fun provideMemoryRepository(memoryDao: MemoryDao): MemoryRepository = MemoryRepository(memoryDao)
+
+    @Provides
+    @Singleton
     fun provideIntentManager(): IntentManager = LocalIntentManager()
 
     @Provides
@@ -102,13 +115,17 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAppRepository(appInfoDao: AppInfoDao): AppRepository = AppRepository(appInfoDao)
-
-    @Provides
-    @Singleton
-    fun provideTaskRepository(taskDao: TaskDao): TaskRepository = TaskRepository(taskDao)
-
-    @Provides
-    @Singleton
-    fun provideMemoryRepository(memoryDao: MemoryDao): MemoryRepository = MemoryRepository(memoryDao)
+    fun provideAgentOrchestrator(
+        intentManager: IntentManager,
+        taskManager: TaskManager,
+        memoryStore: MemoryStore,
+        modelRouter: ModelRouter,
+        toolRegistry: ToolRegistry,
+    ): AgentOrchestrator = JarvisAgentOrchestrator(
+        intentManager = intentManager,
+        taskManager = taskManager,
+        memoryStore = memoryStore,
+        modelRouter = modelRouter,
+        toolRegistry = toolRegistry,
+    )
 }
