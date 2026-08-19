@@ -58,7 +58,7 @@ jobs:
 
       - name: Assemble Debug APK
         run: |
-          ./gradlew :app:assembleDebug --no-daemon --stacktrace
+          ./gradlew :app:clean :app:assembleDebug --no-daemon --stacktrace --rerun-tasks
 
       - name: Locate APK
         run: |
