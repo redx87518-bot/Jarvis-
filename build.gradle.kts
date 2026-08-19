@@ -5,7 +5,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath("com.google.dagger:hilt-gradle-plugin:2.52")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.52")
     }
 }
 
