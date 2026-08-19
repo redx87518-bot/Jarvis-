@@ -73,15 +73,15 @@ afterEvaluate {
             val generatedDir = file("build/generated/hilt/component_sources/debug")
             val classOutput = file("build/intermediates/javac/debug/classes")
             val runtimeClasspath = configurations.findByName("debugRuntimeClasspath")
-            if (generatedDir.exists() && generatedDir.listFiles()?.isNotEmpty() == true && runtimeClasspath != null) {
-                val cp = (runtimeClasspath.files + classOutput).joinToString(File.pathSeparator) { it.absolutePath }
-                exec {
-                    commandLine(
-                        "javac",
-                        "-d", classOutput.absolutePath,
-                        "-classpath", cp,
-                        *generatedDir.walkTopDown().filter { it.extension == "java" }.map { it.absolutePath }.toTypedArray()
-                    )
+            if (generatedDir.exists() && runtimeClasspath != null) {
+                val javaFiles = generatedDir.walkTopDown().filter { it.extension == "java" }.toList()
+                if (javaFiles.isNotEmpty()) {
+                    val cp = (runtimeClasspath.files + classOutput).joinToString(File.pathSeparator) { it.absolutePath }
+                    exec {
+                        commandLine = listOf("javac", "-d", classOutput.absolutePath, "-classpath", cp) +
+                            javaFiles.map { it.absolutePath }
+                        isIgnoreExitValue = true
+                    }
                 }
             }
         }
