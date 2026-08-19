@@ -67,6 +67,27 @@ android {
     }
 }
 
+afterEvaluate {
+    tasks.matching { it.name == "hiltJavaCompileDebug" }.configureEach {
+        doLast {
+            val generatedDir = file("build/generated/hilt/component_sources/debug")
+            val classOutput = file("build/intermediates/javac/debug/classes")
+            val runtimeClasspath = configurations.findByName("debugRuntimeClasspath")
+            if (generatedDir.exists() && generatedDir.listFiles()?.isNotEmpty() == true && runtimeClasspath != null) {
+                val cp = (runtimeClasspath.files + classOutput).joinToString(File.pathSeparator) { it.absolutePath }
+                exec {
+                    commandLine(
+                        "javac",
+                        "-d", classOutput.absolutePath,
+                        "-classpath", cp,
+                        *generatedDir.walkTopDown().filter { it.extension == "java" }.map { it.absolutePath }.toTypedArray()
+                    )
+                }
+            }
+        }
+    }
+}
+
 dependencies {
     implementation(project(":core"))
     implementation(project(":data"))
