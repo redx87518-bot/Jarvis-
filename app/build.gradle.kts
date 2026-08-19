@@ -51,6 +51,12 @@ android {
         }
     }
 
+    sourceSets {
+        getByName("debug") {
+            java.srcDir("build/generated/hilt/component_sources/debug")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -65,6 +71,12 @@ android {
         unitTests.all {
             it.jvmArgs("--add-opens=java.base/java.lang=ALL-UNNAMED")
         }
+    }
+}
+
+afterEvaluate {
+    tasks.matching { it.name.contains("compileDebugJavaWithJavac") }.configureEach {
+        dependsOn(tasks.matching { it.name.contains("hiltJavaCompileDebug") })
     }
 }
 
