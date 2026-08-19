@@ -126,7 +126,4 @@ dependencies {
                 }
             }
         }
-        tasks.matching { it.name.startsWith("processDebug") || it.name.startsWith("transformDebug") || it.name.startsWith("mergeDebug") || it.name.startsWith("dexBuilderDebug") }.configureEach {
-            dependsOn("hiltJavaCompileDebug")
-        }
     }
