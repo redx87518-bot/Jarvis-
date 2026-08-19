@@ -26,6 +26,7 @@ androidxComposeUiToolingPreview = { group = "androidx.compose.ui", name = "ui-to
 androidxComposeUiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidxComposeMaterial3 = { group = "androidx.compose.material3", name = "material3" }
 androidxComposeMaterialIconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" }
+androidxMaterial = { group = "com.google.android.material", name = "material", version = "1.12.0" }
 androidxNavigationCompose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 
 kotlinxCoroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }

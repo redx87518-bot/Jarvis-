@@ -16,6 +16,6 @@
     </style>
 
     <style name="Theme.JARVIS.FullScreen" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowBackground">@color.jarvis_black</item>
+        <item name="android:windowBackground">@color/jarvis_black</item>
     </style>
 </resources>
