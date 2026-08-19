@@ -60,6 +60,15 @@ jobs:
         run: |
           ./gradlew :app:clean :app:assembleDebug --no-daemon --stacktrace --rerun-tasks
 
+      - name: Debug - Check Hilt generated code
+        run: |
+          echo "=== Generated KSP files ==="
+          find app/build/generated -name "*.kt" -path "*hilt*" -o -name "*.kt" -path "*Hilt*" -o -name "*_Factory*" -o -name "*_MembersInjector*" 2>/dev/null | head -30
+          echo "=== Generated KAPT files ==="
+          find app/build/generated -name "*.java" -path "*hilt*" 2>/dev/null | head -10
+          echo "=== Classes.dex Hilt check ==="
+          unzip -l app/build/outputs/apk/debug/*.apk 2>/dev/null | grep -i "Hilt_\|Factory\|Dagger.*Component" | head -20
+
       - name: Locate APK
         run: |
           find app/build/outputs/apk -name "*.apk" -print
