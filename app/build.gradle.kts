@@ -108,19 +108,19 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.12")
 }
 
-gradle.projectsEvaluated {
-    val compileJavaTask = tasks.named("compileDebugJavaWithJavac", JavaCompile::class.java)
+    gradle.projectsEvaluated {
+        val compileJavaTask = tasks.named("compileDebugJavaWithJavac", JavaCompile::class.java)
 
-    val compileHilt = tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
-        source = fileTree(file("build/generated/hilt/component_sources/debug"))
-        classpath = files(
-            compileJavaTask.map { it.classpath },
-            compileJavaTask.map { it.destinationDirectory }
-        )
-        destinationDirectory.set(compileJavaTask.map { it.destinationDirectory })
-    }
+        val compileHilt = tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
+            source = fileTree(file("build/generated/hilt/component_sources/debug"))
+            classpath = files(
+                compileJavaTask.map { it.classpath },
+                compileJavaTask.map { it.destinationDirectory }
+            )
+            destinationDirectory.set(compileJavaTask.map { it.destinationDirectory.get() })
+        }
 
-    tasks.named("hiltJavaCompileDebug").configure {
-        finalizedBy(compileHilt)
+        tasks.named("hiltJavaCompileDebug").configure {
+            finalizedBy(compileHilt)
+        }
     }
-}
