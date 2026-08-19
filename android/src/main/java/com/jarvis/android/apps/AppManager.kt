@@ -135,7 +135,7 @@ class SystemAppManager(
 
     override suspend fun uninstallApp(packageName: String): JarvisResult<Unit> {
         return try {
-            val intent = Intent(Intent.ACTION_UNINSTALL, Uri.fromParts("package", packageName, null))
+            val intent = Intent(Intent.ACTION_DELETE, Uri.fromParts("package", packageName, null))
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
             JarvisResult.Success(Unit)
