@@ -1,12 +1,13 @@
 <resources>
     <style name="Theme.JARVIS" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color.md_theme_primary</item>
-        <item name="colorPrimaryVariant">@color.md_theme_primaryVariant</item>
-        <item name="colorOnPrimary">@color.md_theme_onPrimary</item>
-        <item name="colorSecondary">@color.md_theme_secondary</item>
-        <item name="colorSecondaryVariant">@color.md_theme_secondaryVariant</item>
-        <item name="colorOnSecondary">@color.md_theme_onSecondary</item>
-        <item name="android:windowBackground">?attr/colorSurface</item>
+        <item name="colorPrimary">@color/jarvis_primary</item>
+        <item name="colorOnPrimary">@color/jarvis_on_primary</item>
+        <item name="colorSecondary">@color/jarvis_secondary</item>
+        <item name="colorOnSecondary">@color/jarvis_on_secondary</item>
+        <item name="colorSurface">@color/jarvis_surface</item>
+        <item name="colorOnSurface">@color/jarvis_on_surface</item>
+        <item name="colorBackground">@color/jarvis_background</item>
+        <item name="colorOnBackground">@color/jarvis_on_background</item>
         <item name="windowLightStatusBar">false</item>
     </style>
 
@@ -17,5 +18,8 @@
 
     <style name="Theme.JARVIS.FullScreen" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/jarvis_black</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullScreen">true</item>
+        <item name="android:windowContentOverlay">false</item>
     </style>
 </resources>

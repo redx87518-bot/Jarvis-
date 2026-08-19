@@ -1,5 +1,5 @@
 <resources>
-    <style name="Widget.JARVIS.Toolbar" parent="Widget.Material3.CenterAlignedTopAppBar">
+    <style name="Widget.JARVIS.Toolbar" parent="Widget.Material3.Toolbar">
         <item name="android:background">?attr/colorSurface</item>
     </style>
 </resources>

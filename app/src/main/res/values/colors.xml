@@ -1,21 +1,16 @@
 <resources>
-    <color name="jarvis_black">#0A0A0E</color>
+    <color name="jarvis_primary">#4A90D9</color>
+    <color name="jarvis_on_primary">#FFFFFF</color>
+    <color name="jarvis_secondary">#8E7CFA</color>
+    <color name="jarvis_on_secondary">#FFFFFF</color>
     <color name="jarvis_surface">#1A1A22</color>
+    <color name="jarvis_on_surface">#E5E5E5</color>
+    <color name="jarvis_background">#0A0A0E</color>
+    <color name="jarvis_on_background">#E5E5E5</color>
+    <color name="jarvis_error">#FF5252</color>
+    <color name="jarvis_on_error">#FFFFFF</color>
+    <color name="jarvis_black">#0A0A0E</color>
     <color name="jarvis_surface_variant">#2A2A37</color>
-
-    <color name="md_theme_primary">#4A90D9</color>
-    <color name="md_theme_primaryVariant">#3A7BC8</color>
-    <color name="md_theme_onPrimary">#FFFFFF</color>
-    <color name="md_theme_secondary">#8E7CFA</color>
-    <color name="md_theme_secondaryVariant">#7A68D1</color>
-    <color name="md_theme_onSecondary">#FFFFFF</color>
-    <color name="md_theme_surface">#121217</color>
-    <color name="md_theme_onSurface">#E5E5E5</color>
-    <color name="md_theme_onSurfaceVariant">#A0A0AC</color>
-    <color name="md_theme_background">#0A0A0E</color>
-    <color name="md_theme_onBackground">#E5E5E5</color>
-    <color name="md_theme_error">#FF5252</color>
-    <color name="md_theme_onError">#FFFFFF</color>
     <color name="jarvis_status_ready">#4CAF50</color>
     <color name="jarvis_status_listening">#FF5252</color>
     <color name="jarvis_status_processing">#FF9800</color>
