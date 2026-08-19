@@ -108,7 +108,7 @@ fun JarvisOrb(
         contentAlignment = Alignment.Center,
     ) {
         Canvas(modifier = Modifier.size(canvasSize)) {
-            val center = Offset(size.width / 2f, size.height / 2f)
+            val center = Offset(this.size.width / 2f, this.size.height / 2f)
             val outerRadius = canvasSize.toPx() / 2f
             val ringRadius = outerRadius * (0.6f + 0.2f * pulseProgress)
 

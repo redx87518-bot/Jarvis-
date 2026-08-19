@@ -46,7 +46,6 @@ fun JarvisBottomBar(
             .fillMaxWidth()
             .height(56.dp)
             .navigationBarsPadding(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         items.forEach { item ->
             NavigationBarItem(

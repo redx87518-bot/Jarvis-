@@ -1,7 +1,7 @@
 package com.jarvis.launcher.features.voice
 
 import android.os.Bundle
-import androidx.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.CubicBezierEasing
