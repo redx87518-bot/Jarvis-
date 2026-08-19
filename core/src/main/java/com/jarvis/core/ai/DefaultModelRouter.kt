@@ -3,9 +3,8 @@ package com.jarvis.core.ai
 import com.jarvis.core.ChatMessage
 import com.jarvis.core.JarvisResult
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
-class DefaultModelRouter @Inject constructor(
+class DefaultModelRouter(
     private val localProvider: LocalModelProvider,
     private val cloudProviders: List<CloudModelProvider>,
 ) : ModelRouter {
@@ -54,7 +53,7 @@ class DefaultModelRouter @Inject constructor(
     }
 }
 
-class StubModelRouter @Inject constructor() : ModelRouter {
+class StubModelRouter : ModelRouter {
     private val local = LocalModelProvider()
 
     override suspend fun route(

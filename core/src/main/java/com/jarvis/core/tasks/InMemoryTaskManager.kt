@@ -1,6 +1,7 @@
 package com.jarvis.core.tasks
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 interface TaskManager {
     suspend fun createTask(task: Task): Task
