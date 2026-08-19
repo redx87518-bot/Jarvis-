@@ -15,6 +15,6 @@
     <style name="Theme.JARVIS.FullScreen" parent="Theme.JARVIS">
         <item name="android:windowBackground">@color/jarvis_black</item>
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">false</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 </resources>
