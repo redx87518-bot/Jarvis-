@@ -45,7 +45,6 @@ dependencies {
     api("androidx.datastore:datastore:1.0.0")
 
     api(libs.hiltAndroid)
-    ksp(libs.hiltCompiler)
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
