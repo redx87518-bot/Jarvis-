@@ -2,7 +2,7 @@ package com.jarvis.launcher.di
 
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import androidx.room.Room
 import com.jarvis.android.apps.AppManager
 import com.jarvis.android.apps.SystemAppManager
