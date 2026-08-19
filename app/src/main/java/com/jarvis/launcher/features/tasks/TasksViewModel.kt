@@ -9,9 +9,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import com.jarvis.core.tasks.isActive
 import javax.inject.Inject
 
 data class TasksUiState(
@@ -30,16 +32,25 @@ class TasksViewModel @Inject constructor(
     private val _selectedFilter = MutableStateFlow(TaskFilter.ACTIVE)
     val selectedFilter = _selectedFilter.asStateFlow()
 
-    val activeTasks = taskManager.observeTasks()
-        .map { tasks -> tasks.filter { it.isActive } }
+    val activeTasks = flow {
+        taskManager.observeTasks().collect { tasks ->
+            emit(tasks.filter { it.isActive })
+        }
+    }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    val completedTasks = taskManager.observeTasks()
-        .map { tasks -> tasks.filter { it.status.name == "COMPLETED" } }
+    val completedTasks = flow {
+        taskManager.observeTasks().collect { tasks ->
+            emit(tasks.filter { it.status.name == "COMPLETED" })
+        }
+    }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    val failedTasks = taskManager.observeTasks()
-        .map { tasks -> tasks.filter { it.status.name == "FAILED" } }
+    val failedTasks = flow {
+        taskManager.observeTasks().collect { tasks ->
+            emit(tasks.filter { it.status.name == "FAILED" })
+        }
+    }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     val uiState = _selectedFilter

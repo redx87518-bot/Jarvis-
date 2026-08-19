@@ -57,6 +57,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jarvis.core.tasks.Task
 import com.jarvis.core.tasks.TaskFilter
 import com.jarvis.core.tasks.TaskStatus
+import com.jarvis.core.tasks.isActive
 import com.jarvis.launcher.ui.components.TaskTimeline
 import com.jarvis.launcher.ui.components.TaskStepItem
 import com.jarvis.launcher.ui.components.TaskStepStatus
@@ -309,14 +310,12 @@ private fun statusLabel(status: TaskStatus): String = when (status) {
     TaskStatus.RUNNING -> "Running"
     TaskStatus.CREATED -> "Pending"
     TaskStatus.PLANNING -> "Planning"
-    TaskStatus.EXECUTING -> "Executing"
     TaskStatus.WAITING_FOR_USER -> "Waiting"
     TaskStatus.VERIFYING -> "Verifying"
     TaskStatus.RECOVERING -> "Recovering"
     TaskStatus.COMPLETED -> "Completed"
     TaskStatus.FAILED -> "Failed"
     TaskStatus.CANCELLED -> "Cancelled"
-    TaskStatus.CREATED -> "Created"
 }
 
 @Composable

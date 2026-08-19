@@ -466,7 +466,7 @@ fun SettingItem(
                 color = colors.textPrimary,
             )
         }
-        trailing?.invoke(this) ?: Icon(
+        trailing?.invoke() ?: Icon(
             imageVector = Icons.Default.ChevronRight,
             contentDescription = null,
             tint = colors.textSecondary,
