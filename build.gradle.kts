@@ -5,7 +5,12 @@ plugins {
     alias(libs.plugins.kotlinSerialization) apply false
     alias(libs.plugins.kotlinCompose) apply false
     alias(libs.plugins.ksp) apply false
-    alias(libs.plugins.hilt) apply false
+}
+
+buildscript {
+    dependencies {
+        classpath("com.google.dagger:hilt-android-gradle-plugin:${libs.versions.hilt.get()}")
+    }
 }
 
 task("clean") {

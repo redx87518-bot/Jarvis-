@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlinCompose)
-    alias(libs.plugins.hilt)
+    id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
     id("kotlin-kapt")
 }
@@ -48,12 +48,6 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
-    sourceSets {
-        getByName("debug") {
-            java.srcDir("build/generated/hilt/component_sources/debug")
         }
     }
 
