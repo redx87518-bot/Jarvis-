@@ -109,32 +109,34 @@ dependencies {
 }
 
     gradle.projectsEvaluated {
-        val compileJavaTask = tasks.named("compileDebugJavaWithJavac", JavaCompile::class.java)
-        val kotlinTask = tasks.findByName("compileDebugKotlin") as? JavaCompile
         val hiltCompDir = file("build/generated/hilt/component_sources/debug")
+        val hiltClassesDir = layout.buildDirectory.dir("hilt-classes/debug")
+        val javaClassesDir = file("build/intermediates/javac/debug/classes")
+        val kotlinClassesDir = file("build/intermediates/kotlin/debug")
 
         val compileHilt = tasks.register<JavaCompile>("compileHiltComponentSourcesDebug") {
             source = fileTree(hiltCompDir)
             classpath = files(
-                compileJavaTask.map { it.classpath },
-                compileJavaTask.map { it.destinationDirectory },
-                kotlinTask?.destinationDirectory
+                javaClassesDir,
+                kotlinClassesDir,
+                files(configurations.get("debugCompileClasspath"))
             )
-            destinationDirectory.set(layout.buildDirectory.dir("hilt-classes/debug"))
+            destinationDirectory.set(hiltClassesDir)
         }
 
         tasks.named("hiltJavaCompileDebug").configure {
             finalizedBy(compileHilt)
         }
 
-        val hiltClassesDir = layout.buildDirectory.dir("hilt-classes/debug")
         tasks.matching {
-            it.name in listOf("mergeDebugClasses", "transformDebugClassesWithAsm", "transformDebugClassesWithInlineClasses", "dexBuilderDebug", "processDebugJavaRes", "processDebugResources") ||
-            it.name.startsWith("mergeProjectDex") ||
-            it.name.startsWith("transformClassesWith") ||
-            it.name.startsWith("dexBuilder")
+            it.name in listOf(
+                "processDebugJavaRes",
+                "transformDebugClassesWithAsm",
+                "mergeDebugClasses",
+                "dexBuilderDebug",
+                "mergeProjectDexDebug"
+            ) || it.name.startsWith("mergeProjectDex")
         }.configureEach {
             dependsOn(compileHilt)
-            inputs.files(compileHilt.map { it.destinationDirectory })
         }
     }
