@@ -97,6 +97,7 @@ dependencies {
     implementation(libs.androidxRoomKtx)
 
     implementation(libs.hiltAndroid)
+    ksp(libs.hiltCompiler)
 
     debugImplementation(libs.androidxComposeUiTooling)
 
